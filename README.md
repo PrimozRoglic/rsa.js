@@ -66,6 +66,7 @@ Hello World
 ### JavaScript
 [JS BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)  
 [JS BigInt guide](https://golb.hplar.ch/2018/09/javascript-bigint.html)  
+[Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)  
 
 ### Useful tools
 [First 10000 primes](https://primes.utm.edu/lists/small/10000.txt)  
