@@ -1,36 +1,9 @@
-/**
- * Returns a random integer between min (inclusive) and max (inclusive).
- * The value is no lower than min (or the next integer greater than min
- * if min isn't an integer) and no greater than max (or the next integer
- * lower than max if max isn't an integer).
- * Using Math.round() will give you a non-uniform distribution!
- */
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-// source: https://golb.hplar.ch/2018/09/javascript-bigint.html
-function sqrt(value) {
-    if (value < 0n) {
-      throw 'square root of negative numbers is not supported'
-    }
-
-    if (value < 2n) {
-      return value;
-    }
-
-    function newtonIteration(n, x0) {
-      const x1 = ((n / x0) + x0) >> 1n;
-      if (x0 === x1 || x0 === (x1 - 1n)) {
-        return x0;
-      }
-      return newtonIteration(n, x1);
-    }
-
-    return newtonIteration(value, 1n);
-}
+const {
+  getRandomInt,
+  sqrt,
+  modularPower,
+  generateRandomNbitNumber
+} = require("./numbers.js");
 
 function isPrimeNaive(n) {
   
@@ -70,22 +43,13 @@ function decompose(n) {
   }
 }
 
-function modularPow(base, exponent, modulus) {
-  if (modulus === 1n) return 0n;
-  let c = 1n;
-  for (let i = 0n; i < exponent; i++) {
-    c = (c*base) % modulus;
-  }
-  return c;
-}
-
 function millerRabin(n, k) {
   let decomposed = decompose(n);
   let flag = false;
   
   for (let i = 0; i<k; i++) {
     let a = BigInt(getRandomInt(2, parseInt(n)-2));
-    let x = modularPow(a, decomposed.d, n);
+    let x = modularPower(a, decomposed.d, n);
     
     if (x === 1n || x === n-1n) {
       continue; 
@@ -109,8 +73,37 @@ function millerRabin(n, k) {
   return true;
 }
 
+function isPrimeNice(n) {
+   const firstHunderedPrimes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 
+    59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 
+    151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 
+    251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 
+    359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 
+    463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541];
+  
+  for (let i = 0; i < firstHunderedPrimes.length; i++) {
+    let prime = firstHunderedPrimes[i];
+    if (n % BigInt(prime) === 0n && !(n === BigInt(prime))) {
+      return false; 
+    }
+  }
+  
+  // error is 4^-k, 8 gives 0.002% error
+  return millerRabin(n, 8);
+}
+
+function generateNbitPrime(n) {
+  while (true) {
+    let candidate = generateRandomNbitNumber(n);
+    if (isPrimeNice(candidate)) {
+      return candidate; 
+    }
+  }
+}
+
 module.exports = {
   decompose,
   millerRabin,
-  isPrimeNaive
+  isPrimeNaive,
+  generateNbitPrime
 }

@@ -1,7 +1,8 @@
 const {
   decompose,
   millerRabin,
-  isPrimeNaive
+  isPrimeNaive,
+  generateNbitPrime
 } = require("./primes.js");
 
 function test_decompose() {
@@ -33,5 +34,4 @@ function test_millerRabin() {
 }
 test_millerRabin();
 
-// console.log(millerRabin(381209696409982741455524918473n, n));
-// console.log(isPrimeNaive(381209696409982741455524918473n));
+console.log("Random 1024 bit prime: \n", generateNbitPrime(1024));
