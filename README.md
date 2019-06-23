@@ -58,7 +58,7 @@ Hello World
 [Miller-Rabin wiki](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test)  
 [Modular exponentiation wiki](https://en.wikipedia.org/wiki/Modular_exponentiation)  
 [Integer square root wiki](https://en.wikipedia.org/wiki/Integer_square_root)  
-[Newton method wiki](https://en.wikipedia.org/wiki/Newton%27s_method) 
+[Newton method wiki](https://en.wikipedia.org/wiki/Newton%27s_method)  
 [Extended Euclidean Algorithm wiki](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm)  
 [Euclidean algorithm wiki](https://en.wikipedia.org/wiki/Euclidean_algorithm)  
 [ASCII wiki](https://en.wikipedia.org/wiki/ASCII)  
